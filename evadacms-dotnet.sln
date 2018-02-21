@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{812E446B-9BA9-44D3-9BDA-D2393E5CFFBE}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evada.Core", "src\Evada.Core\Evada.Core.csproj", "{A5338ED4-D05E-4801-9DBB-301047C7A0BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{753E1629-1BF3-42A6-97C6-35F7883AEE6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evada.AuthenticationApi", "src\Evada.AuthenticationApi\Evada.AuthenticationApi.csproj", "{5C3C3F42-624D-4D01-AD38-4E7010F91736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evada.ManagementApi", "src\Evada.ManagementApi\Evada.ManagementApi.csproj", "{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0636F75C-A906-4AA6-8239-A764A155C2E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleWorkbench", "ConsoleWorkbench\ConsoleWorkbench.csproj", "{2552D042-4EFD-4C4B-A43E-2403EB3842E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5338ED4-D05E-4801-9DBB-301047C7A0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5338ED4-D05E-4801-9DBB-301047C7A0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5338ED4-D05E-4801-9DBB-301047C7A0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5338ED4-D05E-4801-9DBB-301047C7A0BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3C3F42-624D-4D01-AD38-4E7010F91736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3C3F42-624D-4D01-AD38-4E7010F91736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3C3F42-624D-4D01-AD38-4E7010F91736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3C3F42-624D-4D01-AD38-4E7010F91736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2552D042-4EFD-4C4B-A43E-2403EB3842E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2552D042-4EFD-4C4B-A43E-2403EB3842E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2552D042-4EFD-4C4B-A43E-2403EB3842E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2552D042-4EFD-4C4B-A43E-2403EB3842E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5338ED4-D05E-4801-9DBB-301047C7A0BC} = {753E1629-1BF3-42A6-97C6-35F7883AEE6C}
+		{5C3C3F42-624D-4D01-AD38-4E7010F91736} = {753E1629-1BF3-42A6-97C6-35F7883AEE6C}
+		{A0638590-2D6D-4258-B1A0-9C44ABC3A8E5} = {753E1629-1BF3-42A6-97C6-35F7883AEE6C}
+		{2552D042-4EFD-4C4B-A43E-2403EB3842E1} = {0636F75C-A906-4AA6-8239-A764A155C2E7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF7B0F76-7D07-4D4A-9649-B4E322F877CD}
+	EndGlobalSection
+EndGlobal

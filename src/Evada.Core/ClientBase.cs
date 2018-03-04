@@ -1,6 +1,6 @@
 ﻿using Evada.Core.Http;
 
-namespace Evada.ManagementApi.Clients
+namespace Evada.Core
 {
     /// <summary>
     /// The base class from which all clients inherit. Give clients access to the underlying <see cref="IApiConnection"/>.
@@ -10,13 +10,13 @@ namespace Evada.ManagementApi.Clients
         /// <summary>
         /// The <see cref="IApiConnection"/> which is used to make all API calls.
         /// </summary>
-        internal IApiConnection Connection { get; }
+        public IApiConnection Connection { get; }
 
         /// <summary>
         /// Creates a new instance of the ClientBase class.
         /// </summary>
         /// <param name="connection">The <see cref="IApiConnection"/> which is used to communicate with the API.</param>
-        internal ClientBase(IApiConnection connection)
+        public ClientBase(IApiConnection connection)
         {
             Connection = connection;
         }

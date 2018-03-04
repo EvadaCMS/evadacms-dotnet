@@ -17,6 +17,11 @@ namespace Evada.ManagementApi
         IContainersClient Containers { get; }
 
         /// <summary>
+        /// Contains all the methods to call the /connect/token endpoint
+        /// </summary>
+        IAuthorizationClient Authorization { get; }
+
+        /// <summary>
         /// Gets information about the last API call
         /// </summary>
         ApiInfo GetLastApiInfo();

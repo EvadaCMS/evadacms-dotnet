@@ -1,4 +1,5 @@
-﻿using Evada.Core.Http;
+﻿using Evada.Core;
+using Evada.Core.Http;
 using Evada.ManagementApi.Models;
 using System;
 using System.Collections.Generic;

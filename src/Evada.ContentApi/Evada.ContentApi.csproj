@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Authors>Eric Zimmerman</Authors>
+    <Company>32 Technologies, LLC</Company>
+    <Product>Evada CMS</Product>
+    <Description>Official .NET library for retrieving content items from Evada CMS.</Description>
+    <Copyright>2018 Eric Zimmerman</Copyright>
+    <PackageLicenseUrl>https://github.com/EvadaCMS/evadacms-dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/EvadaCMS/evadacms-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/EvadaCMS/evadacms-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>evada evadacms cms aspnet mvc</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Evada.Core\Evada.Core.csproj" />
+  </ItemGroup>
+
+</Project>

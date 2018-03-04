@@ -11,7 +11,10 @@ namespace Evada.ManagementApi
     {
         private readonly ApiConnection _apiConnection;
 
+        private readonly string _baseUrl = "https://api.evadacms.com";
+
         public IContainersClient Containers { get; }
+        public IAuthorizationClient Authorization { get; }
 
         /// <summary>
         /// Gets information about the last API call
@@ -21,7 +24,7 @@ namespace Evada.ManagementApi
             return _apiConnection.ApiInfo;
         }
 
-        public ManagementApiClient(string token, string baseUrl, DiagnosticsHeader diagnostics, HttpMessageHandler handler)
+        public ManagementApiClient(string token, DiagnosticsHeader diagnostics, HttpMessageHandler handler, string baseUrl = "")
         {
             // If no diagnostics header structure was specified, then revert to the default one
             if (diagnostics == null)
@@ -29,16 +32,35 @@ namespace Evada.ManagementApi
                 diagnostics = DiagnosticsHeader.Default;
             }
 
-            // TODO
-            _apiConnection = new ApiConnection(token, baseUrl, diagnostics, handler);
+            if (!string.IsNullOrEmpty(baseUrl))
+            {
+                _baseUrl = baseUrl;
+            }
+
+            _apiConnection = new ApiConnection(token, _baseUrl, diagnostics, handler);
             
             Containers = new ContainersClient(_apiConnection);
+            Authorization = new AuthorizationClient(_apiConnection);
         }
 
-        public ManagementApiClient(string token, string baseUrl)
-            : this(token, baseUrl, null, null)
+        public ManagementApiClient(string token, string baseUrl = "")
+            : this(token, null, null, baseUrl)
         {
+        }
 
+        public ManagementApiClient(string token)
+            : this(token, null, null)
+        {
+        }
+
+        public ManagementApiClient()
+            : this(string.Empty, null, null)
+        {
+        }
+
+        public ManagementApiClient(DiagnosticsHeader diagnostics, HttpMessageHandler handler)
+            : this(string.Empty, diagnostics, handler, string.Empty)
+        {
         }
     }
 }

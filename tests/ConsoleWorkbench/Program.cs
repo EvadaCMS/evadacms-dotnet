@@ -1,6 +1,12 @@
-﻿using Evada.ManagementApi;
+﻿using Evada.ContentApi;
+using Evada.ContentApi.Models;
+using Evada.Core.QueryParameters;
+using Evada.ManagementApi;
 using Evada.ManagementApi.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ConsoleWorkbench
@@ -17,9 +23,105 @@ namespace ConsoleWorkbench
             // Containers_GetAll().GetAwaiter().GetResult();
             // Containers_Get().GetAwaiter().GetResult();
             // Containers_Create().GetAwaiter().GetResult();
-            Containers_Update().GetAwaiter().GetResult();
+            // Containers_Update().GetAwaiter().GetResult();
+
+            // ContentItems_GetAll().GetAwaiter().GetResult();
+            // ContentItems_Get().GetAwaiter().GetResult();
+
+            //ContentItems_TPF().GetAwaiter().GetResult();
+            ContentItems_Serialized().GetAwaiter().GetResult();
+
+            //Management_CreateAuthorizationToken().GetAwaiter().GetResult();
+
 
             Console.ReadKey();
+        }
+
+        public static async Task Management_CreateAuthorizationToken()
+        {
+            var managementApiClient = new ManagementApiClient(string.Empty, _baseUrl);
+            var token = await managementApiClient.Authorization.CreateTokenAsync("0aafe00db0cc4b809233cbe0d6dada4f", "BlJRXGmZjp0R5Xutg+1R7Y5dMu8FixoiRZAtvqZislg=");
+            Console.WriteLine(token.AccessToken);
+        }
+
+        public static async Task ContentItems_Get()
+        {
+            var contentApiClient = new ContentApiClient("e28f16bb-7cde-4c84-bfeb-f9ed7f450f9b", _token, _baseUrl);
+            
+            var item = await contentApiClient.ContentItems.GetAsync("eric-zimmerman",
+                new List<IQueryParameter>
+                {
+                    new LanguageParameter("en-US"),
+                    new DepthParameter(1),
+                    new ExcludeModulesParameter(false)
+                });
+            //var modules = ((IEnumerable<dynamic>)item.modules);
+            /*foreach (var module in modules)
+            {
+                Console.WriteLine(module.value);
+            }*/
+
+            //Console.WriteLine(item.name);
+        }
+
+        public static async Task ContentItems_Serialized()
+        {
+            var contentApiClient = new ContentApiClient("e28f16bb-7cde-4c84-bfeb-f9ed7f450f9b");
+            ContentItem item = await contentApiClient.ContentItems.GetAsync("eric-zimmermans", 
+                new List<IQueryParameter>
+                {
+                    new DepthParameter(1)
+                });
+
+            var nameModule = item.Modules.FirstOrDefault(x => x.Slug == "name");
+            Console.WriteLine(nameModule.Value);
+            /*foreach (var module in item.Modules)
+            {
+                Console.WriteLine(module.Value);
+            }*/
+        }
+
+        public static async Task ContentItems_TPF()
+        {
+            var contentApiClient = new ContentApiClient("729e5a36-798d-4006-8dfe-397c26d6db2d");
+
+            ContentItem item = await contentApiClient.ContentItems.GetAsync("home-page");
+            //Console.WriteLine(item.ContentType.Slug);
+            foreach (var module in item.Modules)
+            {
+                Console.WriteLine(module.Id);
+            }
+            
+        }
+
+        public static async Task ContentItems_GetAll()
+        {
+            var contentApiClient = new ContentApiClient("e28f16bb-7cde-4c84-bfeb-f9ed7f450f9b", _token, _baseUrl);
+            var items = await contentApiClient.ContentItems.GetAllAsync(new TypesParameter("author", "about-page"));
+
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.name);
+                /*var modules = ((IEnumerable<dynamic>)item.modules);
+                foreach (var module in modules)
+                {
+                    Console.WriteLine(module.value);
+                }*/
+            }
+            /*foreach (var item in items)
+            {
+                var textModules = ((IEnumerable<dynamic>)item.modules).Where(x => x.type == "text");
+                foreach (var txt in textModules)
+                {
+                    Console.WriteLine(txt.value);
+                }
+            }*/
+
+            var authorItems = ((IEnumerable<dynamic>)items).Where(x => x.content_type.slug == "author");
+            foreach (var author in authorItems)
+            {
+                Console.WriteLine(author.slug);
+            }
         }
 
         public static async Task Containers_GetAll()

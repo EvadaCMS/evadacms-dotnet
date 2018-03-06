@@ -14,7 +14,7 @@ namespace ConsoleWorkbench
     class Program
     {
         static string _token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZjYTdkZDc0ZTkzNWVkODlkMDIwOTRjZmYxOTQxYjg2IiwidHlwIjoiSldUIn0.eyJuYmYiOjE1MTkxNTk3MzEsImV4cCI6MTUxOTI0NjEzMSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0OTk2MCIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjQ5OTYwL3Jlc291cmNlcyIsImFwaSJdLCJjbGllbnRfaWQiOiIwYWFmZTAwZGIwY2M0YjgwOTIzM2NiZTBkNmRhZGE0ZiIsImNvbnRhaW5lcklkIjoiZTI4ZjE2YmItN2NkZS00Yzg0LWJmZWItZjllZDdmNDUwZjliIiwic3Vic2NyaXB0aW9uSWQiOiIwYmQ2NGVjNy0yZDhkLTRkNTYtOTlhOC1mOGFjYTYxMzdiZjUiLCJzdWIiOiJhOTc3OTA2Ni1iZDJjLTRhYTUtOTQ1Yi1hODdiMDBlNjU1ZDgiLCJqdGkiOiI5ZjljNTM0ZDg5ZGVlNDQzZDRjMjU5N2JmZTM2NmEwNiIsInNjb3BlIjpbImNyZWF0ZTpjb250YWluZXJzIiwicmVhZDphc3NldHMiLCJyZWFkOmNvbnRhaW5lcnMiLCJyZWFkOmNvbnRlbnRfaXRlbXMiLCJyZWFkOmNvbnRlbnRfdHlwZV9tb2R1bGVzIiwicmVhZDpjb250ZW50X3R5cGVzIiwicmVhZDpsYW5ndWFnZXMiLCJyZWFkOm1vZHVsZXMiLCJyZWFkOnVzZXJzIiwicmVhZDp3b3JrZmxvd19zdGVwcyIsInVwZGF0ZTpjb250YWluZXJzIl19.jCw_MwG4PHjx0WXBgO8h1G10BHYExEuR-p-aGFU-TwsmyMDq9Q8vHuXDVuMaD_4ywXR1-fU3NGJE0rEKE9X4q9ogDEsYj_rRzWaY3dCfXczrrlBvxvO-399Bze-PnrOV3D5u0VNpXXR0VkqyQtCtLUgkIGl9cEQB_nf2BbBocaCJM0nvtml0AuhlHywyuYmD6Py2HeDPuqV0nw4ul_i3QCIA4Ti4QwLbbhX5-6i5LOT1qifQ7uLzA7QblNY8gzyGdC3y4NaT5MyS5kOlpaZVzkZsAcVAX8pgJUHncIDqb8WLq33H-t5i58VmygAGuSzzXyaRKg1zjF_Crb6Crg2O1Q";
-        static string _baseUrl = "http://localhost:49960";
+        static string _baseUrl = "https://localhost:49961";
 
         static void Main(string[] args)
         {
@@ -29,7 +29,8 @@ namespace ConsoleWorkbench
             // ContentItems_Get().GetAwaiter().GetResult();
 
             //ContentItems_TPF().GetAwaiter().GetResult();
-            ContentItems_Serialized().GetAwaiter().GetResult();
+            ContentItems_TPF_HomePage().GetAwaiter().GetResult();
+            // ContentItems_Serialized().GetAwaiter().GetResult();
 
             //Management_CreateAuthorizationToken().GetAwaiter().GetResult();
 
@@ -81,17 +82,48 @@ namespace ConsoleWorkbench
             }*/
         }
 
-        public static async Task ContentItems_TPF()
+        public static async Task ContentItems_TPF_HomePage()
         {
-            var contentApiClient = new ContentApiClient("729e5a36-798d-4006-8dfe-397c26d6db2d");
+            var contentApiClient = new ContentApiClient("729e5a36-798d-4006-8dfe-397c26d6db2d", string.Empty, _baseUrl);
 
             ContentItem item = await contentApiClient.ContentItems.GetAsync("home-page");
-            //Console.WriteLine(item.ContentType.Slug);
-            foreach (var module in item.Modules)
+            var assets = item.GetAssets("banner-image");
+
+            List<ContentItem> showItems = await contentApiClient.ContentItems.GetAllAsync(new List<IQueryParameter>
             {
-                Console.WriteLine(module.Id);
+                new TypesParameter("show"),
+                new DepthParameter(1)
+            });
+
+            foreach (var show in showItems)
+            {
+                var venue = show.GetReferenceItems("venue").FirstOrDefault();
+                if (venue != null)
+                {
+                    Console.WriteLine(venue.GetString("name"));
+                }
             }
-            
+        }
+
+        public static async Task ContentItems_TPF()
+        {
+            var contentApiClient = new ContentApiClient("729e5a36-798d-4006-8dfe-397c26d6db2d", string.Empty, _baseUrl);
+
+            //ContentItem item = await contentApiClient.ContentItems.GetAsync("home-page");
+            List<ContentItem> showItems = await contentApiClient.ContentItems.GetAllAsync(new List<IQueryParameter>
+            {
+                new TypesParameter("show"),
+                new DepthParameter(1)
+            });
+
+            foreach (var show in showItems)
+            {
+                var venue = show.GetReferenceItems("venue").FirstOrDefault();
+                if (venue != null)
+                {
+                    Console.WriteLine(venue.GetString("name"));
+                }
+            }
         }
 
         public static async Task ContentItems_GetAll()
@@ -101,7 +133,7 @@ namespace ConsoleWorkbench
 
             foreach (var item in items)
             {
-                Console.WriteLine(item.name);
+                //Console.WriteLine(item.name);
                 /*var modules = ((IEnumerable<dynamic>)item.modules);
                 foreach (var module in modules)
                 {

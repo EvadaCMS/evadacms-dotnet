@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,49 @@ namespace Evada.ContentApi.Models
         {
             var module = GetModule(slug);
             return (module == null) ? string.Empty : (string)module.Value;
+        }
+
+        public List<ContentItem> GetReferenceItems(string slug)
+        {
+            var module = GetModule(slug);
+            if (module == null)
+            {
+                return null;
+            }
+
+            List<ContentItem> references = new List<ContentItem>();
+            if (module.Value == null)
+            {
+                return null;
+            }
+            foreach (var id in (JArray)module.Value)
+            {
+                var match = References.Where(r => r.Id == id.ToObject<Guid>()).FirstOrDefault();
+                if (match != null)
+                {
+                    references.Add(match);
+                }
+            }
+
+            return references;
+        }
+
+        public List<Asset> GetAssets(string slug)
+        {
+            var assets = new List<Asset>();
+
+            var module = GetModule(slug);
+            if (module == null)
+            {
+                return assets;    
+            }
+
+            foreach (var asset in (JArray)module.Value)
+            {
+                assets.Add(asset.ToObject<Asset>());
+            }
+
+            return assets;
         }
     }
 }

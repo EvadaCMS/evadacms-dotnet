@@ -36,14 +36,22 @@ namespace Evada.ContentApi.Clients
 
         public async Task<List<ContentItem>> GetAllAsync(IEnumerable<IQueryParameter> parameters)
         {
-            var result = await Connection.GetAsync<Dictionary<string, List<ContentItem>>>("{containerId}/content-items",
+            var result = await Connection.GetAsync<ContentItemsResult>("{containerId}/content-items",
                 new Dictionary<string, string>
                 {
                     { "containerId", _containerId }
                 },
                 parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
 
-            return result["content_items"];
+            return result.ContentItems;
+            /*var result = await Connection.GetAsync<Dictionary<string, List<ContentItem>>>("{containerId}/content-items",
+                new Dictionary<string, string>
+                {
+                    { "containerId", _containerId }
+                },
+                parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
+
+            return result["content_items"];*/
         }
 
         //public async Task<dynamic> GetAsync(string slug, IEnumerable<IQueryParameter> parameters = null)

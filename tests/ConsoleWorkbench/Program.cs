@@ -29,8 +29,10 @@ namespace ConsoleWorkbench
             // ContentItems_Get().GetAwaiter().GetResult();
 
             //ContentItems_TPF().GetAwaiter().GetResult();
-            ContentItems_TPF_HomePage().GetAwaiter().GetResult();
+            //ContentItems_TPF_HomePage().GetAwaiter().GetResult();
+            ContentItems_Via_Home().GetAwaiter().GetResult();
             // ContentItems_Serialized().GetAwaiter().GetResult();
+
 
             //Management_CreateAuthorizationToken().GetAwaiter().GetResult();
 
@@ -103,6 +105,37 @@ namespace ConsoleWorkbench
                     Console.WriteLine(venue.GetString("name"));
                 }
             }
+        }
+
+        public static async Task ContentItems_Via_Home()
+        {
+            var contentApiClient = new ContentApiClient("be140d2b-267f-4ba5-9b60-dc8ebcb5446c", string.Empty, _baseUrl);
+
+            ContentItem item = await contentApiClient.ContentItems.GetAsync("home", new List<IQueryParameter>
+            {
+                new DepthParameter(1)
+            });
+            /*var assets = item.GetAssets("banner-image");
+
+            List<ContentItem> showItems = await contentApiClient.ContentItems.GetAllAsync(new List<IQueryParameter>
+            {
+                new TypesParameter("show"),
+                new DepthParameter(1)
+            });
+
+            foreach (var show in showItems)
+            {
+                var venue = show.GetReferenceItems("venue").FirstOrDefault();
+                if (venue != null)
+                {
+                    Console.WriteLine(venue.GetString("name"));
+                }
+            }*/
+            var hero = item.GetReferenceItems("hero-unit").FirstOrDefault();
+            if (hero != null)
+            {
+                Console.WriteLine(hero.GetString("title"));
+            }            
         }
 
         public static async Task ContentItems_TPF()

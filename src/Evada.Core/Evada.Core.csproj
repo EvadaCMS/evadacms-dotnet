@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
+    <Version>1.0.1</Version>
+    <Authors>Eric Zimmerman</Authors>
+    <Company>32 Technologies, LLC</Company>
+    <Product>Evada CMS</Product>
+    <Description>Core library for Evada CMS.</Description>
+    <Copyright>2018 Eric Zimmerman</Copyright>
+    <PackageLicenseUrl>https://github.com/EvadaCMS/evadacms-dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/EvadaCMS/evadacms-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/EvadaCMS/evadacms-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>evada evadacms cms aspnet mvc</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

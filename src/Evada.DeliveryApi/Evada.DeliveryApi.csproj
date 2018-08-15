@@ -13,6 +13,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>evada evadacms cms aspnet mvc</PackageTags>
     <Version>1.0.1</Version>
+    <AssemblyName>Evada.DeliveryApi</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

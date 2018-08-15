@@ -11,7 +11,7 @@ namespace Evada.Core.QueryParameters
             Language = language;
         }
 
-        public string Name { get; } = "lang";
+        public string Name { get; } = "system.language";
         
         public string Value
         {

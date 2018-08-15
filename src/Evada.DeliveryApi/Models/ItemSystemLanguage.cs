@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Evada.ContentApi.Models
+namespace Evada.DeliveryApi.Models
 {
-    public class ContentItemLanguage
+    public class ItemSystemLanguage
     {
         [JsonProperty("code")]
         public string Code { get; set; }

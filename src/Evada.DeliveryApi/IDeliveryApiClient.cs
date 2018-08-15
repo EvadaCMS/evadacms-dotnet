@@ -1,17 +1,17 @@
-﻿using Evada.ContentApi.Clients;
+﻿using Evada.DeliveryApi.Clients;
 using Evada.Core.Http;
 
-namespace Evada.ContentApi
+namespace Evada.DeliveryApi
 {
     /// <summary>
-    /// Represents the Content API client.
+    /// Represents the Delivery API client.
     /// </summary>
-    public interface IContentApiClient
+    public interface IDeliveryApiClient
     {
         /// <summary>
         /// Contains all the methods to call the /content-items endpoints
         /// </summary>
-        IContentItemsClient ContentItems { get; }
+        IItemsClient Items { get; }
 
         /// <summary>
         /// Gets information about the last API call

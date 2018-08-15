@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Evada.ContentApi\Evada.ContentApi.csproj" />
+    <ProjectReference Include="..\..\src\Evada.DeliveryApi\Evada.DeliveryApi.csproj" />
     <ProjectReference Include="..\..\src\Evada.ManagementApi\Evada.ManagementApi.csproj" />
   </ItemGroup>
 

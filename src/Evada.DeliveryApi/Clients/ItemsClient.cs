@@ -1,13 +1,10 @@
-﻿using Evada.DeliveryApi.Models;
-using Evada.Core;
+﻿using Evada.Core;
 using Evada.Core.Http;
 using Evada.Core.QueryParameters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Evada.DeliveryApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Evada.DeliveryApi.Clients
@@ -15,16 +12,19 @@ namespace Evada.DeliveryApi.Clients
     public class ItemsClient : ClientBase, IItemsClient
     {
         private readonly string _containerId;
+        private readonly LanguageParameter _defaultLanguageParameter;
 
         /// <summary>
         /// Creates a new instance of the <see cref="ItemsClient"/> class.
         /// </summary>
         /// <param name="connection">The <see cref="IApiConnection" /> which is used to communicate with the API.</param>
         /// <param name="containerId">The container ID</param>
-        public ItemsClient(IApiConnection connection, string containerId)
+        /// <param name="languageCode">The default language to use</param>
+        public ItemsClient(IApiConnection connection, string containerId, string languageCode = "en-US")
             : base(connection)
         {
             _containerId = containerId;
+            _defaultLanguageParameter = new LanguageParameter(languageCode);
         }
 
         /// <summary>
@@ -39,21 +39,14 @@ namespace Evada.DeliveryApi.Clients
 
         public Task<ItemsResult> GetAsync(IEnumerable<IQueryParameter> parameters)
         {
+            parameters = EnsureLanguageIsPresent(parameters);
+
             return Connection.GetAsync<ItemsResult>("{containerId}/items",
                 new Dictionary<string, string>
                 {
                     { "containerId", _containerId }
                 },
                 parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
-
-            /*var result = await Connection.GetAsync<Dictionary<string, List<ContentItem>>>("{containerId}/content-items",
-                new Dictionary<string, string>
-                {
-                    { "containerId", _containerId }
-                },
-                parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
-
-            return result["content_items"];*/
         }
 
         public async Task<Item> GetSingleAsync(string slug, IEnumerable<IQueryParameter> parameters = null)
@@ -62,6 +55,8 @@ namespace Evada.DeliveryApi.Clients
             {
                 parameters = new List<IQueryParameter>();
             }
+
+            parameters = EnsureLanguageIsPresent(parameters);
 
             var result = await Connection.GetAsync<Dictionary<string, Item>>("{containerId}/items/{slug}",
                 new Dictionary<string, string>
@@ -81,6 +76,8 @@ namespace Evada.DeliveryApi.Clients
                 parameters = new List<IQueryParameter>();
             }
 
+            parameters = EnsureLanguageIsPresent(parameters);
+
             var result = await Connection.GetAsync<Dictionary<string, Item>>("{containerId}/items/{id}",
                 new Dictionary<string, string>
                 {
@@ -90,6 +87,16 @@ namespace Evada.DeliveryApi.Clients
                 parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
 
             return result["item"];
+        }
+
+        private IEnumerable<IQueryParameter> EnsureLanguageIsPresent(IEnumerable<IQueryParameter> parameters)
+        {
+            if (!parameters.Any(p => p is LanguageParameter))
+            {
+                parameters.Append(_defaultLanguageParameter);
+            }
+
+            return parameters;
         }
     }
 }

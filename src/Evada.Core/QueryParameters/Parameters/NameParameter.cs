@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class NameParameter : IQueryParameter
+    public class NameParameter : QueryParameter
     {
         public string ItemName { get; set; }
         public ParameterOperator ParameterOperator { get; set; }
@@ -11,7 +11,7 @@
             ItemName = itemName;
         }
 
-        public string Name
+        public override string Name
         {
             get
             {
@@ -19,7 +19,7 @@
             }
         }
 
-        public string Value
+        public override string Value
         {
             get { return ItemName; }
         }

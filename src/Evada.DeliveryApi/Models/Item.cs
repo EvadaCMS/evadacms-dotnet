@@ -20,12 +20,25 @@ namespace Evada.DeliveryApi.Models
             {
                 return null;
             }
-            return Modules[slug];
+            if (Modules.ContainsKey(slug))
+            {
+                return Modules[slug];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public string GetString(string slug)
         {
-            return GetValue<string>(slug);
+            var value = GetValue<string>(slug);
+            return value ?? string.Empty;
+        }
+
+        public List<Asset> GetAsset(string slug)
+        {
+            return GetValue<List<Asset>>(slug);
         }
 
         public T GetValue<T>(string slug)

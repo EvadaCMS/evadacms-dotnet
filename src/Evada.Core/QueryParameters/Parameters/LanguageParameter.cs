@@ -2,7 +2,7 @@
 
 namespace Evada.Core.QueryParameters
 {
-    public class LanguageParameter : IQueryParameter
+    public class LanguageParameter : QueryParameter
     {
         public string Language { get; }
 
@@ -11,9 +11,9 @@ namespace Evada.Core.QueryParameters
             Language = language;
         }
 
-        public string Name { get; } = "system.language";
-        
-        public string Value
+        public override string Name { get; } = "system.language";
+
+        public override string Value
         {
             get { return Uri.EscapeDataString(Language); }
         }

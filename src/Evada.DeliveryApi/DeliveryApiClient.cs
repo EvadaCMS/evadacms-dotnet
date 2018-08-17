@@ -1,9 +1,6 @@
-﻿using Evada.DeliveryApi.Clients;
-using Evada.Core.Http;
-using System;
-using System.Collections.Generic;
+﻿using Evada.Core.Http;
+using Evada.DeliveryApi.Clients;
 using System.Net.Http;
-using System.Text;
 
 namespace Evada.DeliveryApi
 {
@@ -23,6 +20,7 @@ namespace Evada.DeliveryApi
 
         public DeliveryApiClient(
             string containerId,
+            string languageCode,
             string baseUrl,
             DiagnosticsHeader diagnostics,
             HttpMessageHandler handler)
@@ -35,16 +33,21 @@ namespace Evada.DeliveryApi
 
             _apiConnection = new ApiConnection(string.Empty, baseUrl, diagnostics, handler);
 
-            Items = new ItemsClient(_apiConnection, containerId);
+            Items = new ItemsClient(_apiConnection, containerId, languageCode);
         }
 
-        public DeliveryApiClient(string containerId, string baseUrl)
-            : this(containerId, baseUrl, null, null)
+        public DeliveryApiClient(string containerId, string languageCode, string baseUrl)
+            : this(containerId, languageCode, baseUrl, null, null)
+        {
+        }
+
+        public DeliveryApiClient(string containerId, string languageCode)
+            : this(containerId, languageCode, string.Empty, null, null)
         {
         }
 
         public DeliveryApiClient(string containerId)
-            : this(containerId, string.Empty, null, null)
+            : this(containerId, string.Empty, string.Empty, null, null)
         {
         }
     }

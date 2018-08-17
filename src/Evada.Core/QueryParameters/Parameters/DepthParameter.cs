@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class DepthParameter : IQueryParameter
+    public class DepthParameter : QueryParameter
     {
         public int Depth { get; }
 
@@ -9,9 +9,9 @@
             Depth = depth;
         }
 
-        public string Name { get; } = "depth";
+        public override string Name { get; } = "depth";
 
-        public string Value
+        public override string Value
         {
             get { return Depth.ToString(); }
         }

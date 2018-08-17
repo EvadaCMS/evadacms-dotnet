@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class OrderParameter : IQueryParameter
+    public class OrderParameter : QueryParameter
     {
         public string OrderBy { get; set; }
         public bool Descending { get; set; }
@@ -11,9 +11,9 @@
             OrderBy = orderBy;
         }
 
-        public string Name { get; } = "order";
+        public override string Name { get; } = "order";
 
-        public string Value
+        public override string Value
         {
             get
             {

@@ -2,7 +2,7 @@
 
 namespace Evada.Core.QueryParameters
 {
-    public class FirstPublishedAtParameter : IQueryParameter
+    public class FirstPublishedAtParameter : QueryParameter
     {
         public DateTime FirstPublishedAt { get; set; }
         public ParameterOperator ParameterOperator { get; set; }
@@ -13,7 +13,7 @@ namespace Evada.Core.QueryParameters
             FirstPublishedAt = firstPublishedAt;
         }
 
-        public string Name
+        public override string Name
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Evada.Core.QueryParameters
             }
         }
 
-        public string Value
+        public override string Value
         {
             get { return FirstPublishedAt.ToString(); }
         }

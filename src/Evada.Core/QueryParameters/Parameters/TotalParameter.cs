@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class TotalParameter : IQueryParameter
+    public class TotalParameter :QueryParameter
     {
         public bool Total { get; }
 
@@ -9,9 +9,9 @@
             Total = total;
         }
 
-        public string Name { get; } = "total";
+        public override string Name { get; } = "total";
 
-        public string Value
+        public override string Value
         {
             get { return Total.ToString().ToLowerInvariant(); }
         }

@@ -2,7 +2,7 @@
 
 namespace Evada.Core.QueryParameters
 {
-    public class TypeParameter : IQueryParameter
+    public class TypeParameter : QueryParameter
     {
         public Guid TypeId { get; set; }
 
@@ -11,9 +11,9 @@ namespace Evada.Core.QueryParameters
             TypeId = typeId;
         }
 
-        public string Name { get; } = "system.type.id";
+        public override string Name { get; } = "system.type.id";
 
-        public string Value
+        public override string Value
         {
             get
             {

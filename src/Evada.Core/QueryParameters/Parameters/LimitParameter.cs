@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class LimitParameter : IQueryParameter
+    public class LimitParameter : QueryParameter
     {
         public int Limit { get; }
 
@@ -9,9 +9,9 @@
             Limit = limit;
         }
 
-        public string Name { get; } = "limit";
+        public override string Name { get; } = "limit";
 
-        public string Value
+        public override string Value
         {
             get { return Limit.ToString(); }
         }

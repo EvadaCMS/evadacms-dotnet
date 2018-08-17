@@ -1,6 +1,6 @@
 ﻿namespace Evada.Core.QueryParameters
 {
-    public class SkipParameter : IQueryParameter
+    public class SkipParameter : QueryParameter
     {
         public int Skip { get; }
 
@@ -9,9 +9,9 @@
             Skip = skip;
         }
 
-        public string Name { get; } = "skip";
+        public override string Name { get; } = "skip";
 
-        public string Value
+        public override string Value
         {
             get { return Skip.ToString(); }
         }

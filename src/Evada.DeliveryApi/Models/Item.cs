@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Evada.DeliveryApi.Models
 {
@@ -39,6 +41,16 @@ namespace Evada.DeliveryApi.Models
         public List<Asset> GetAsset(string slug)
         {
             return GetValue<List<Asset>>(slug);
+        }
+
+        public List<Item> GetReferences(string slug)
+        {
+            var ids = GetValue<List<Guid>>(slug);
+            if (ids == null)
+            {
+                return new List<Item>();
+            }
+            return References.Where(r => ids.Any(x => x == r.System.Id)).ToList();
         }
 
         public T GetValue<T>(string slug)

@@ -49,10 +49,16 @@ namespace ConsoleWorkbench
 
             var bannerSlides = item.References
                 .Where(r => r.System.Type.Id == new Guid("0da33202-760f-4ff1-9cee-e20f6ab80673")).ToList();
-            var imageModule = bannerSlides[0].GetAsset("image");
-            Console.WriteLine(imageModule[0].Location);
 
-            Console.WriteLine(item.System.Name);
+            //var serviceReferenceIds = item.GetValue<List<Guid>>("services");
+            //var serviceItems = item.References.Where(r => serviceReferenceIds.Any(x => x == r.System.Id));
+            var serviceItems = item.GetReferences("services");
+            foreach (var si in serviceItems)
+            {
+                Console.WriteLine(si.System.Name);
+            }
+
+            //Console.WriteLine(item.System.Name);
         }
 
         public static async Task Items_GetAll_With_OrderBy()

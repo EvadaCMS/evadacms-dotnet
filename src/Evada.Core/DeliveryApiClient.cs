@@ -1,16 +1,16 @@
 ﻿using Evada.Core.Http;
-using Evada.DeliveryApi.Clients;
+using Evada.Core.Services.Items;
 using System.Net.Http;
 
-namespace Evada.DeliveryApi
+namespace Evada.Core
 {
-    public class DeliveryApiClient : IDeliveryApiClient
+    public class DeliveryApiClient
     {
         public string DeliveryApiCdn => "https://cdn.evadacms.com/v1/";
 
         private readonly ApiConnection _apiConnection;
 
-        public IItemsClient Items { get; }
+        public ItemService Items { get; }
 
         /// <summary>
         /// Gets information about the last API call
@@ -39,7 +39,7 @@ namespace Evada.DeliveryApi
                 diagnostics,
                 handler);
 
-            Items = new ItemsClient(_apiConnection, containerId, defaultLanguageCode);
+            Items = new ItemService(_apiConnection, containerId, defaultLanguageCode);
         }
 
         public DeliveryApiClient(string containerId, string defaultLanguageCode, string baseUrl)

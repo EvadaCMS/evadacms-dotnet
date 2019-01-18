@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Evada.DeliveryApi.Models
+namespace Evada.Core.Services.Assets
 {
     public class AssetMetadata
     {

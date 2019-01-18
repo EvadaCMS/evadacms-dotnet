@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Evada.Core.Services.Assets;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Evada.DeliveryApi.Models
+namespace Evada.Core.Services.Items
 {
     public class Item
     {

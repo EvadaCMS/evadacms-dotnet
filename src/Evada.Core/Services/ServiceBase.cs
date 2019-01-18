@@ -1,11 +1,11 @@
 ﻿using Evada.Core.Http;
 
-namespace Evada.Core
+namespace Evada.Core.Services
 {
     /// <summary>
-    /// The base class from which all clients inherit. Give clients access to the underlying <see cref="IApiConnection"/>.
+    /// The base class from which all services inherit. Give services access to the underlying <see cref="IApiConnection"/>.
     /// </summary>
-    public class ClientBase
+    public class ServiceBase
     {
         /// <summary>
         /// The <see cref="IApiConnection"/> which is used to make all API calls.
@@ -13,10 +13,10 @@ namespace Evada.Core
         public IApiConnection Connection { get; }
 
         /// <summary>
-        /// Creates a new instance of the ClientBase class.
+        /// Creates a new instance of the ServiceBase class.
         /// </summary>
         /// <param name="connection">The <see cref="IApiConnection"/> which is used to communicate with the API.</param>
-        public ClientBase(IApiConnection connection)
+        public ServiceBase(IApiConnection connection)
         {
             Connection = connection;
         }

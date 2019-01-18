@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Evada.DeliveryApi.Models
+namespace Evada.Core.Services.Assets
 {
     public class AssetSystem
     {

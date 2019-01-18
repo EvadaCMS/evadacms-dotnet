@@ -6,7 +6,7 @@
     <Authors>Eric Zimmerman</Authors>
     <Company>32 Technologies, LLC</Company>
     <Product>Evada CMS</Product>
-    <Description>Core library for Evada CMS.</Description>
+    <Description>Official .NET library for Evada CMS.</Description>
     <Copyright>2019 Eric Zimmerman</Copyright>
     <PackageLicenseUrl>https://github.com/EvadaCMS/evadacms-dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/EvadaCMS/evadacms-dotnet</PackageProjectUrl>

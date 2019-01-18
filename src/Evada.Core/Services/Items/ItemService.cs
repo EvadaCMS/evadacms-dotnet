@@ -1,26 +1,25 @@
 ﻿using Evada.Core;
 using Evada.Core.Http;
 using Evada.Core.QueryParameters;
-using Evada.DeliveryApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Evada.DeliveryApi.Clients
+namespace Evada.Core.Services.Items
 {
-    public class ItemsClient : ClientBase, IItemsClient
+    public class ItemService : ServiceBase
     {
         private readonly string _containerId;
         private readonly LanguageParameter _defaultLanguageParameter;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="ItemsClient"/> class.
+        /// Creates a new instance of the <see cref="ItemService"/> class.
         /// </summary>
         /// <param name="connection">The <see cref="IApiConnection" /> which is used to communicate with the API.</param>
         /// <param name="containerId">The container ID</param>
         /// <param name="languageCode">The default language to use</param>
-        public ItemsClient(IApiConnection connection, string containerId, string languageCode = "en-US")
+        public ItemService(IApiConnection connection, string containerId, string languageCode = "en-US")
             : base(connection)
         {
             _containerId = containerId;

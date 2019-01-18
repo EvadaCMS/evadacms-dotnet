@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Evada.DeliveryApi.Models
+namespace Evada.Core.Services.Items
 {
     public class ItemModule
     {

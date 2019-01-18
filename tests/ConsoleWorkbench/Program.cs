@@ -1,17 +1,14 @@
-﻿using Evada.DeliveryApi;
-using Evada.DeliveryApi.Models;
-using Evada.Core.QueryParameters;
-using Evada.ManagementApi;
-using Evada.ManagementApi.Models;
+﻿using Evada.Core.QueryParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
+using Evada.Core;
+using Evada.Core.Services.Assets;
 
 namespace ConsoleWorkbench
 {
-    class Program
+  class Program
     {
         const string _baseUrl = "https://localhost:49965";
         const string _containerId = "be140d2b-267f-4ba5-9b60-dc8ebcb5446c";

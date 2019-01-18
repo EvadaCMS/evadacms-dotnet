@@ -6,9 +6,13 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <ProjectReference Include="..\..\src\Evada.DeliveryApi\Evada.DeliveryApi.csproj" />
     <ProjectReference Include="..\..\src\Evada.ManagementApi\Evada.ManagementApi.csproj" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Evada.Core\Evada.Core.csproj" />
   </ItemGroup>
 
 </Project>

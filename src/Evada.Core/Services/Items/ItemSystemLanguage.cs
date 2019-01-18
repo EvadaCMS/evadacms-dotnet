@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Evada.DeliveryApi.Models
+namespace Evada.Core.Services.Items
 {
     public class ItemSystemLanguage
     {

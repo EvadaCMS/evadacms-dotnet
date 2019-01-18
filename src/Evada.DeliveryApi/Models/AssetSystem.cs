@@ -8,10 +8,10 @@ namespace Evada.DeliveryApi.Models
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
-        [JsonProperty("created_at")]
+        [JsonProperty("createdAt")]
         public DateTime CreatedDate { get; set; }
 
-        [JsonProperty("updated_at")]
+        [JsonProperty("updatedAt")]
         public DateTime UpdatedDate { get; set; }
     }
 }

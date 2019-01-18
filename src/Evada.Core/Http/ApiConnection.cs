@@ -7,8 +7,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-// ReSharper disable once CheckNamespace
-
 namespace Evada.Core.Http
 {
     /// <summary>
@@ -18,7 +16,8 @@ namespace Evada.Core.Http
     {
         private string _baseUrl { get; } = "https://api.evadacms.com";
         private readonly DiagnosticsHeader _diagnostics;
-        private readonly HttpClient _httpClient;
+        //private readonly HttpClient _httpClient;
+        private static HttpClient _httpClient = new HttpClient();
         private readonly string _token;
 
         /// <summary>
@@ -43,7 +42,8 @@ namespace Evada.Core.Http
                 _baseUrl = baseUrl;
             }
 
-            _httpClient = new HttpClient(handler ?? new HttpClientHandler());
+            // _httpClient = new HttpClient(handler ?? new HttpClientHandler());
+            
         }
 
         private void ApplyHeaders(HttpRequestMessage message, IDictionary<string, object> headers)

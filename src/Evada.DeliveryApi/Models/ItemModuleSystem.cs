@@ -5,10 +5,10 @@ namespace Evada.DeliveryApi.Models
 {
     public class ItemModuleSystem
     {
-        [JsonProperty("module_type")]
-        public ItemModuleSystemModuleType ModuleType { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        [JsonProperty("updated_at")]
+        [JsonProperty("updatedAt")]
         public DateTime UpdatedAt { get; set; }
     }
 }

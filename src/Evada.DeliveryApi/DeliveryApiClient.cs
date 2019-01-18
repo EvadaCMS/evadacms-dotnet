@@ -6,6 +6,8 @@ namespace Evada.DeliveryApi
 {
     public class DeliveryApiClient : IDeliveryApiClient
     {
+        public string DeliveryApiCdn => "https://cdn.evadacms.com/v1/";
+
         private readonly ApiConnection _apiConnection;
 
         public IItemsClient Items { get; }
@@ -20,7 +22,7 @@ namespace Evada.DeliveryApi
 
         public DeliveryApiClient(
             string containerId,
-            string languageCode,
+            string defaultLanguageCode,
             string baseUrl,
             DiagnosticsHeader diagnostics,
             HttpMessageHandler handler)
@@ -31,18 +33,22 @@ namespace Evada.DeliveryApi
                 diagnostics = DiagnosticsHeader.Default;
             }
 
-            _apiConnection = new ApiConnection(string.Empty, baseUrl, diagnostics, handler);
+            _apiConnection = new ApiConnection(
+                string.Empty,
+                string.IsNullOrEmpty(baseUrl) ? DeliveryApiCdn : baseUrl,
+                diagnostics,
+                handler);
 
-            Items = new ItemsClient(_apiConnection, containerId, languageCode);
+            Items = new ItemsClient(_apiConnection, containerId, defaultLanguageCode);
         }
 
-        public DeliveryApiClient(string containerId, string languageCode, string baseUrl)
-            : this(containerId, languageCode, baseUrl, null, null)
+        public DeliveryApiClient(string containerId, string defaultLanguageCode, string baseUrl)
+            : this(containerId, defaultLanguageCode, baseUrl, null, null)
         {
         }
 
-        public DeliveryApiClient(string containerId, string languageCode)
-            : this(containerId, languageCode, string.Empty, null, null)
+        public DeliveryApiClient(string containerId, string defaultLanguageCode)
+            : this(containerId, defaultLanguageCode, string.Empty, null, null)
         {
         }
 

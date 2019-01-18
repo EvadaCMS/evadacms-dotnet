@@ -36,9 +36,47 @@ namespace ConsoleWorkbench
             //Items_GetAll_ByTypeId().GetAwaiter().GetResult();
             //Items_GetSingle().GetAwaiter().GetResult();
 
-            Med_Get_Home().GetAwaiter().GetResult();
+            // Med_Get_Home().GetAwaiter().GetResult();
+
+            // VIA_Get_Home().GetAwaiter().GetResult();
+            VIA_Get_All_Items().GetAwaiter().GetResult();
 
             Console.ReadKey();
+        }
+
+        public static async Task VIA_Get_All_Items()
+        {
+            var client = new DeliveryApiClient(containerId: "76d1ea39-a4eb-4270-b9dc-899653415f8f", defaultLanguageCode: "en-US");
+            var result = await client.Items.GetAsync(new QueryParameter[] 
+            {
+                new DepthParameter(1),
+                new LanguageParameter("en-US")
+            });
+            
+            foreach (var item in result.Items)
+            {
+                Console.WriteLine(item.System.Slug);
+            }
+        }
+
+        public static async Task VIA_Get_Home()
+        {
+            var client = new DeliveryApiClient(containerId: "76d1ea39-a4eb-4270-b9dc-899653415f8f", defaultLanguageCode: "en-US");
+            var item = await client.Items.GetSingleAsync("home_page",
+                new QueryParameter[] {
+                    new DepthParameter(1)
+                });
+
+            foreach (var module in item.Modules)
+            {
+                Console.WriteLine(module.Value.System.Type);
+            }
+
+            List<Asset> tileImages = item.GetAssets("tile_images");
+            foreach (var image in tileImages)
+            {
+                Console.WriteLine(image.Location);
+            }
         }
 
         public static async Task Med_Get_Home()

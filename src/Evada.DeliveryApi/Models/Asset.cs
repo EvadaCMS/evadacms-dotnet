@@ -11,7 +11,7 @@ namespace Evada.DeliveryApi.Models
         [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty("file_name")]
+        [JsonProperty("fileName")]
         public string FileName { get; set; }
 
         [JsonProperty("location")]

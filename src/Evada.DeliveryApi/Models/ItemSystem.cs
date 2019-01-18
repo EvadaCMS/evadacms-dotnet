@@ -14,20 +14,26 @@ namespace Evada.DeliveryApi.Models
         [JsonProperty("slug")]
         public string Slug { get; set; }
 
-        [JsonProperty("created_at")]
+        [JsonProperty("createdAt")]
         public DateTime CreatedDate { get; set; }
 
-        [JsonProperty("updated_at")]
+        [JsonProperty("updatedAt")]
         public DateTime UpdatedDate { get; set; }
 
         [JsonProperty("published")]
         public bool Published { get; set; }
 
-        [JsonProperty("publish_date")]
+        [JsonProperty("publishDate")]
         public DateTime? PublishDate { get; set; }
 
-        [JsonProperty("first_published_date")]
+        [JsonProperty("firstPublishedAt")]
         public DateTime? FirstPublishedDate { get; set; }
+
+        [JsonProperty("publishedVersion")]
+        public int? PublishedVersion { get; set; }
+
+        [JsonProperty("version")]
+        public int Verison { get; set; }
 
         [JsonProperty("type")]
         public ItemSystemType Type { get; set; }
@@ -35,7 +41,7 @@ namespace Evada.DeliveryApi.Models
         [JsonProperty("language")]
         public ItemSystemLanguage Language { get; set; }
 
-        [JsonProperty("workflow_step")]
+        [JsonProperty("workflowStep")]
         public ItemWorkflowStep WorkflowStep { get; set; }
     }
 }

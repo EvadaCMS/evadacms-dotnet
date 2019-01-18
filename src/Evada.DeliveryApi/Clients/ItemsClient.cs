@@ -93,7 +93,9 @@ namespace Evada.DeliveryApi.Clients
         {
             if (!parameters.Any(p => p is LanguageParameter))
             {
-                parameters.Append(_defaultLanguageParameter);
+                var updatedParameters = new List<IQueryParameter>(parameters);
+                updatedParameters.Add(_defaultLanguageParameter);
+                return updatedParameters;
             }
 
             return parameters;

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evada.Core", "src\Evada.Core\Evada.Core.csproj", "{A5338ED4-D05E-4801-9DBB-301047C7A0BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvadaCms", "src\EvadaCms\EvadaCms.csproj", "{A5338ED4-D05E-4801-9DBB-301047C7A0BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{753E1629-1BF3-42A6-97C6-35F7883AEE6C}"
 EndProject

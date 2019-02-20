@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Evada.Core.Services.Items
+namespace Evada.Services.Items
 {
     public class ItemSystemLanguage
     {

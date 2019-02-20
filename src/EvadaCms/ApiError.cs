@@ -1,10 +1,7 @@
-﻿using Evada.Core.Serialization;
+﻿using Evada.Serialization;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Evada.Core
+namespace Evada
 {
     /// <summary>
     /// Contains information about an error returned from the API.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Evada.Core.Collections
+namespace Evada.Collections
 {
     /// <summary>
     /// A list which contains paged data from the API.

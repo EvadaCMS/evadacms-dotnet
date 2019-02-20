@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Evada.Core.Services.Items
+namespace Evada.Services.Items
 {
     public class ItemWorkflowStep
     {

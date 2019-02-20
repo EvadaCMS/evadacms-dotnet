@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Evada.Core.Services.Items
+namespace Evada.Services.Items
 {
     public class ItemsResult
     {

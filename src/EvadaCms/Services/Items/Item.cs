@@ -1,10 +1,10 @@
-﻿using Evada.Core.Services.Assets;
+﻿using Evada.Services.Assets;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Evada.Core.Services.Items
+namespace Evada.Services.Items
 {
     public class Item
     {
@@ -46,7 +46,7 @@ namespace Evada.Core.Services.Items
         {
             return GetValue<List<T>>(slug);
         }
-        
+
         public List<Guid> GetAssetIds(string slug)
         {
             return GetList<Guid>(slug);

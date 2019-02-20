@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Evada.Core.QueryParameters
+namespace Evada.QueryParameters
 {
     public class SelectParameter : QueryParameter
     {

@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     /// <summary>
     /// Represents information about a software component that's used for diagnostic purposes.

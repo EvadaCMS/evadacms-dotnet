@@ -1,4 +1,4 @@
-﻿using Evada.Core.Exceptions;
+﻿using Evada.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     /// <summary>
     ///     The communication layer between the various API clients and the actual API backend.
@@ -16,8 +16,7 @@ namespace Evada.Core.Http
     {
         private string _baseUrl { get; } = "https://api.evadacms.com";
         private readonly DiagnosticsHeader _diagnostics;
-        //private readonly HttpClient _httpClient;
-        private static HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
         private readonly string _token;
 
         /// <summary>
@@ -32,18 +31,17 @@ namespace Evada.Core.Http
         /// <param name="baseUrl">The base URL of the requests.</param>
         /// <param name="diagnostics">The diagnostics. header</param>
         /// <param name="handler"></param>
-        public ApiConnection(string token, string baseUrl, DiagnosticsHeader diagnostics,
+        public ApiConnection(HttpClient httpClient, string token, string baseUrl, DiagnosticsHeader diagnostics,
             HttpMessageHandler handler = null)
         {
+            _httpClient = httpClient;
             _token = token;
             _diagnostics = diagnostics;
+
             if (!string.IsNullOrEmpty(baseUrl))
             {
                 _baseUrl = baseUrl;
             }
-
-            // _httpClient = new HttpClient(handler ?? new HttpClientHandler());
-            
         }
 
         private void ApplyHeaders(HttpRequestMessage message, IDictionary<string, object> headers)

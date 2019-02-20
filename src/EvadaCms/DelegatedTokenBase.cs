@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Evada.Core
+namespace Evada
 {
     public abstract class DelegatedTokenBase
     {

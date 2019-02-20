@@ -1,12 +1,11 @@
-﻿using Evada.Core;
-using Evada.Core.Http;
-using Evada.Core.QueryParameters;
+﻿using Evada.Http;
+using Evada.QueryParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Evada.Core.Services.Items
+namespace Evada.Services.Items
 {
     public class ItemService : ServiceBase
     {

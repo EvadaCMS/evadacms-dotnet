@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Evada.Core.Serialization
+namespace Evada.Serialization
 {
     /// <summary>
     /// A JSON date converter that reads both ISO 8601 and epoch dates.

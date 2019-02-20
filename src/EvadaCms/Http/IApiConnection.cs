@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     /// <summary>
     ///     The communication layer between the various API clients and the actual API back-end. All API calls happen through

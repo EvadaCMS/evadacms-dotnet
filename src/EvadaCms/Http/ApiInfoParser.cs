@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     internal static class ApiInfoParser
     {

@@ -1,6 +1,6 @@
-﻿using Evada.Core.Http;
+﻿using Evada.Http;
 
-namespace Evada.Core.Services
+namespace Evada.Services
 {
     /// <summary>
     /// The base class from which all services inherit. Give services access to the underlying <see cref="IApiConnection"/>.

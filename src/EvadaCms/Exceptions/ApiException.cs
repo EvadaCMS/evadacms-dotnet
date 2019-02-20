@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Evada.Core.Exceptions
+namespace Evada.Exceptions
 {
     /// <summary>
     /// Represents errors that occur when making API calls.

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Evada.Core
+namespace Evada
 {
     /// <summary>
     /// Represents a delegated refresh token.

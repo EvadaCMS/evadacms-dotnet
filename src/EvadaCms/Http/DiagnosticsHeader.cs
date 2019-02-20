@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     /// <summary>
     ///     Represents important information pertaining to the SDK that is sent to Evada for diagnostic purposes.

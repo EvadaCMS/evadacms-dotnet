@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     public class FileUploadParameter
     {

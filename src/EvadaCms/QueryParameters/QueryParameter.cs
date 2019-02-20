@@ -1,4 +1,4 @@
-﻿namespace Evada.Core.QueryParameters
+﻿namespace Evada.QueryParameters
 {
     public abstract class QueryParameter : IQueryParameter
     {

@@ -1,4 +1,4 @@
-﻿namespace Evada.Core.Http
+﻿namespace Evada.Http
 {
     public class ApiInfo
     {

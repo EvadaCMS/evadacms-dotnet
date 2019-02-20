@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Evada.Core.Http
+namespace Evada.Http
 {
     public class RateLimit
     {

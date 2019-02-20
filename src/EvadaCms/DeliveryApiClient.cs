@@ -1,8 +1,8 @@
-﻿using Evada.Core.Http;
-using Evada.Core.Services.Items;
+﻿using Evada.Http;
+using Evada.Services.Items;
 using System.Net.Http;
 
-namespace Evada.Core
+namespace Evada
 {
     public class DeliveryApiClient
     {
@@ -21,6 +21,7 @@ namespace Evada.Core
         }
 
         public DeliveryApiClient(
+            HttpClient httpClient,
             string containerId,
             string defaultLanguageCode,
             string baseUrl,
@@ -34,6 +35,7 @@ namespace Evada.Core
             }
 
             _apiConnection = new ApiConnection(
+                httpClient,
                 string.Empty,
                 string.IsNullOrEmpty(baseUrl) ? DeliveryApiCdn : baseUrl,
                 diagnostics,
@@ -42,18 +44,18 @@ namespace Evada.Core
             Items = new ItemService(_apiConnection, containerId, defaultLanguageCode);
         }
 
-        public DeliveryApiClient(string containerId, string defaultLanguageCode, string baseUrl)
-            : this(containerId, defaultLanguageCode, baseUrl, null, null)
+        public DeliveryApiClient(HttpClient httpClient, string containerId, string defaultLanguageCode, string baseUrl)
+            : this(httpClient, containerId, defaultLanguageCode, baseUrl, null, null)
         {
         }
 
-        public DeliveryApiClient(string containerId, string defaultLanguageCode)
-            : this(containerId, defaultLanguageCode, string.Empty, null, null)
+        public DeliveryApiClient(HttpClient httpClient, string containerId, string defaultLanguageCode)
+            : this(httpClient, containerId, defaultLanguageCode, string.Empty, null, null)
         {
         }
 
-        public DeliveryApiClient(string containerId)
-            : this(containerId, string.Empty, string.Empty, null, null)
+        public DeliveryApiClient(HttpClient httpClient, string containerId)
+            : this(httpClient, containerId, string.Empty, string.Empty, null, null)
         {
         }
     }

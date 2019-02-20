@@ -4,12 +4,12 @@
 
 ## Installation via NuGet (Visual Studio)
 ```powershell
-PM> Install-Package Evada.Core
+PM> Install-Package EvadaCms
 ```
 
 ## Installation via Nuget (command line)
 ```console
-dotnet add package Evada.Core
+dotnet add package EvadaCms
 ```
 
 ## Usage
@@ -20,7 +20,9 @@ Use the Delivery API Client to pull items and assets from the Evada Delivery API
 found int he Evada Portal.
 
 ``` csharp
+var httpClient = new HttpClient();
 var client = new DeliveryApiClient(
+  httpClient,
   containerId: "3db9a865-34bd-402d-9540-c510867f8b56",
   defaultLanguageCode: "en-US");
 

@@ -23,6 +23,7 @@ found int he Evada Portal.
 var httpClient = new HttpClient();
 var client = new DeliveryApiClient(
   httpClient,
+  token: "MY_DELIVERY_API_TOKEN",_
   containerId: "3db9a865-34bd-402d-9540-c510867f8b56",
   defaultLanguageCode: "en-US");
 

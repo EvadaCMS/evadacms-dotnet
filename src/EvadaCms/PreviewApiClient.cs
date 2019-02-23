@@ -5,9 +5,9 @@ using System.Net.Http;
 
 namespace Evada
 {
-    public class DeliveryApiClient
+    public class PreviewApiClient
     {
-        public string DeliveryApiCdn => "https://cdn.evadacms.com/v1/";
+        public string PreviewApiCdn => "https://preview-api.evadacms.com/v1/";
 
         private readonly ApiConnection _apiConnection;
 
@@ -21,7 +21,7 @@ namespace Evada
             return _apiConnection.ApiInfo;
         }
 
-        public DeliveryApiClient(
+        public PreviewApiClient(
             HttpClient httpClient,
             string token,
             string containerId,
@@ -54,24 +54,24 @@ namespace Evada
             _apiConnection = new ApiConnection(
                 httpClient,
                 token,
-                string.IsNullOrEmpty(baseUrl) ? DeliveryApiCdn : baseUrl,
+                string.IsNullOrEmpty(baseUrl) ? PreviewApiCdn : baseUrl,
                 diagnostics,
                 handler);
 
             Items = new ItemService(_apiConnection, containerId, defaultLanguageCode);
         }
 
-        public DeliveryApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, string baseUrl)
+        public PreviewApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, string baseUrl)
             : this(httpClient, token, containerId, defaultLanguageCode, baseUrl, null, null)
         {
         }
 
-        public DeliveryApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode)
+        public PreviewApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode)
             : this(httpClient, token, containerId, defaultLanguageCode, string.Empty, null, null)
         {
         }
 
-        public DeliveryApiClient(HttpClient httpClient, string token, string containerId)
+        public PreviewApiClient(HttpClient httpClient, string token, string containerId)
             : this(httpClient, token, containerId, string.Empty, string.Empty, null, null)
         {
         }

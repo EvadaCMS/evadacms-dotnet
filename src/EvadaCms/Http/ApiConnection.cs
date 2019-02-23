@@ -14,10 +14,11 @@ namespace Evada.Http
     /// </summary>
     public class ApiConnection : IApiConnection
     {
-        private string _baseUrl { get; } = "https://api.evadacms.com";
+        //private string _baseUrl { get; } = "https://api.evadacms.com";
         private readonly DiagnosticsHeader _diagnostics;
         private readonly HttpClient _httpClient;
         private readonly string _token;
+        private readonly string _baseUrl;
 
         /// <summary>
         ///     Contains information about the last API call made by the connection.
@@ -34,14 +35,23 @@ namespace Evada.Http
         public ApiConnection(HttpClient httpClient, string token, string baseUrl, DiagnosticsHeader diagnostics,
             HttpMessageHandler handler = null)
         {
-            _httpClient = httpClient;
-            _token = token;
-            _diagnostics = diagnostics;
-
-            if (!string.IsNullOrEmpty(baseUrl))
+            if (string.IsNullOrEmpty(baseUrl))
             {
-                _baseUrl = baseUrl;
+                throw new ArgumentNullException(nameof(baseUrl));
             }
+
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new ArgumentNullException(nameof(token));
+            }
+
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+
+            _token = token;
+
+            _baseUrl = baseUrl;
+
+            _diagnostics = diagnostics;
         }
 
         private void ApplyHeaders(HttpRequestMessage message, IDictionary<string, object> headers)
@@ -331,7 +341,7 @@ namespace Evada.Http
             // Deserialize the content
             var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            if (typeof(T) == typeof(string)) // Let string content pass throug
+            if (typeof(T) == typeof(string)) // Let string content pass through
                 return (T)(object)content;
 
             return JsonConvert.DeserializeObject<T>(content, converters);

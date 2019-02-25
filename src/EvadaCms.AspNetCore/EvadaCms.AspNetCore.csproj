@@ -13,9 +13,9 @@
     <RepositoryUrl>https://github.com/EvadaCMS/evadacms-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>evada evadacms cms aspnet mvc aspnetcore</PackageTags>
-    <AssemblyVersion>3.0.1.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
-    <Version>3.0.1</Version>
+    <AssemblyVersion>3.0.2.0</AssemblyVersion>
+    <FileVersion>3.0.2.0</FileVersion>
+    <Version>3.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

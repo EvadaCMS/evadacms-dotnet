@@ -17,7 +17,7 @@ namespace Evada.QueryParameters
         {
             get
             {
-                return $"system.updated_at{ParameterOperator.ToOperatorString()}";
+                return $"system.updatedAt{ParameterOperator.ToOperatorString()}";
             }
         }
 

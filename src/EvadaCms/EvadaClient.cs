@@ -1,13 +1,15 @@
-﻿using Evada.Http;
+﻿using Evada.Configuration;
+using Evada.Http;
 using Evada.Services.Items;
 using System;
 using System.Net.Http;
 
 namespace Evada
 {
-    public class PreviewApiClient
+    public class EvadaClient
     {
-        public string PreviewApiCdn => "https://preview-api.evadacms.com/v1/";
+        public string DeliveryApiUrl => "https://cdn.evadacms.com/v1/";
+        public string PreviewApiUrl => "https://preview-api.evadacms.com/v1/";
 
         private readonly ApiConnection _apiConnection;
 
@@ -21,11 +23,12 @@ namespace Evada
             return _apiConnection.ApiInfo;
         }
 
-        public PreviewApiClient(
+        public EvadaClient(
             HttpClient httpClient,
             string token,
             string containerId,
             string defaultLanguageCode,
+            bool usePreviewApi,
             string baseUrl,
             DiagnosticsHeader diagnostics,
             HttpMessageHandler handler)
@@ -45,6 +48,8 @@ namespace Evada
                 throw new ArgumentNullException(nameof(containerId));
             }
 
+            var url = !string.IsNullOrEmpty(baseUrl) ? baseUrl : usePreviewApi ? PreviewApiUrl : DeliveryApiUrl;
+
             // If no diagnostics header structure was specified, then revert to the default one
             if (diagnostics == null)
             {
@@ -54,25 +59,30 @@ namespace Evada
             _apiConnection = new ApiConnection(
                 httpClient,
                 token,
-                string.IsNullOrEmpty(baseUrl) ? PreviewApiCdn : baseUrl,
+                url,
                 diagnostics,
                 handler);
 
             Items = new ItemService(_apiConnection, containerId, defaultLanguageCode);
         }
 
-        public PreviewApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, string baseUrl)
-            : this(httpClient, token, containerId, defaultLanguageCode, baseUrl, null, null)
+        public EvadaClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, bool usePreviewApi, string baseUrl)
+            : this(httpClient, token, containerId, defaultLanguageCode, usePreviewApi, baseUrl, null, null)
         {
         }
 
-        public PreviewApiClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode)
-            : this(httpClient, token, containerId, defaultLanguageCode, string.Empty, null, null)
+        public EvadaClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, bool usePreviewApi)
+            : this(httpClient, token, containerId, defaultLanguageCode, usePreviewApi, string.Empty, null, null)
         {
         }
 
-        public PreviewApiClient(HttpClient httpClient, string token, string containerId)
-            : this(httpClient, token, containerId, string.Empty, string.Empty, null, null)
+        public EvadaClient(HttpClient httpClient, string token, string containerId)
+            : this(httpClient, token, containerId, string.Empty, false, string.Empty, null, null)
+        {
+        }
+
+        public EvadaClient(HttpClient httpClient, EvadaOptions options)
+            : this(httpClient, options.UsePreviewApi ? options.PreviewApiToken : options.DeliveryApiToken, options.ContainerId, options.DefaultLanguageCode, options.UsePreviewApi, options.BaseUrl)
         {
         }
     }

@@ -16,12 +16,12 @@ dotnet add package EvadaCms
 
 ### Delivery API
 
-Use the Delivery API Client to pull items and assets from the Evada Delivery API. Replace the containerId parameter in the constructor of the DeliveryApiClient class your container ID. Your container ID can be
-found int he Evada Portal.
+Use the Evada client to pull items and assets from the Evada Delivery API. Replace the containerId parameter in the constructor of the EvadaClient class your container ID. Your container ID can be
+found in the Evada Portal.
 
 ``` csharp
 var httpClient = new HttpClient();
-var client = new DeliveryApiClient(
+var client = new EvadaClient(
   httpClient,
   token: "MY_DELIVERY_API_TOKEN",_
   containerId: "3db9a865-34bd-402d-9540-c510867f8b56",

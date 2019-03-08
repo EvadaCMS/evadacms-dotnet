@@ -47,26 +47,6 @@ namespace Evada.Services.Items
                 parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
         }
 
-        public async Task<Item> GetSingleAsync(string slug, IEnumerable<IQueryParameter> parameters = null)
-        {
-            if (parameters == null)
-            {
-                parameters = new List<IQueryParameter>();
-            }
-
-            parameters = EnsureLanguageIsPresent(parameters);
-
-            var result = await Connection.GetAsync<Dictionary<string, Item>>("{containerId}/items/{slug}",
-                new Dictionary<string, string>
-                {
-                    { "containerId", _containerId },
-                    { "slug", slug }
-                },
-                parameters.ToDictionary(x => x.Name, x => x.Value), null, null);
-
-            return result["item"];
-        }
-
         public async Task<Item> GetSingleAsync(Guid id, IEnumerable<IQueryParameter> parameters = null)
         {
             if (parameters == null)

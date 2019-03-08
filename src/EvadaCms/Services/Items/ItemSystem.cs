@@ -11,9 +11,6 @@ namespace Evada.Services.Items
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("slug")]
-        public string Slug { get; set; }
-
         [JsonProperty("createdAt")]
         public DateTime CreatedDate { get; set; }
 

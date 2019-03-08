@@ -3,7 +3,6 @@
     public struct Fields
     {
         public const string Id = "system.id";
-        public const string Slug = "system.slug";
         public const string Name = "system.name";
         public const string Language = "system.language";
         public const string CreatedAt = "system.createdAt";

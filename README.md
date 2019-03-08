@@ -34,7 +34,7 @@ var client = new EvadaClient(
   
   foreach (var item in result.Items)
   {
-      Console.WriteLine(item.System.Slug);
+      Console.WriteLine(item.System.Name);
   }
 ```
 

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Evada.Services.Items
+namespace Evada.Models
 {
     public class ItemSystemLanguage
     {

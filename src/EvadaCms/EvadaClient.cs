@@ -1,16 +1,15 @@
 ﻿using Evada.Configuration;
 using Evada.Http;
-using Evada.Services.Items;
+using Evada.Services;
 using System;
 using System.Net.Http;
 
 namespace Evada
 {
-    public class EvadaClient
+    public class EvadaClient : ClientBase, IEvadaClient
     {
         public string DeliveryApiUrl => "https://cdn.evadacms.com/v1/";
         public string PreviewApiUrl => "https://preview-api.evadacms.com/v1/";
-
         private readonly ApiConnection _apiConnection;
 
         public ItemService Items { get; }
@@ -23,67 +22,21 @@ namespace Evada
             return _apiConnection.ApiInfo;
         }
 
-        public EvadaClient(
-            HttpClient httpClient,
-            string token,
-            string containerId,
-            string defaultLanguageCode,
-            bool usePreviewApi,
-            string baseUrl,
-            DiagnosticsHeader diagnostics,
-            HttpMessageHandler handler)
+        public EvadaClient(HttpClient httpClient, EvadaOptions options)
         {
             if (httpClient == null)
             {
                 throw new ArgumentNullException(nameof(httpClient));
             }
 
-            if (string.IsNullOrEmpty(token))
-            {
-                throw new ArgumentNullException(nameof(token));
-            }
+            _options = options ?? throw new ArgumentNullException(nameof(options));
 
-            if (string.IsNullOrEmpty(containerId))
-            {
-                throw new ArgumentNullException(nameof(containerId));
-            }
+            var url = !string.IsNullOrEmpty(options.BaseUrl) ? options.BaseUrl : options.UsePreviewApi ? PreviewApiUrl : DeliveryApiUrl;
+            var token = options.UsePreviewApi ? options.PreviewApiToken : options.DeliveryApiToken;
 
-            var url = !string.IsNullOrEmpty(baseUrl) ? baseUrl : usePreviewApi ? PreviewApiUrl : DeliveryApiUrl;
+            _apiConnection = new ApiConnection(httpClient, token, url, DiagnosticsHeader.Default, null);
 
-            // If no diagnostics header structure was specified, then revert to the default one
-            if (diagnostics == null)
-            {
-                diagnostics = DiagnosticsHeader.Default;
-            }
-
-            _apiConnection = new ApiConnection(
-                httpClient,
-                token,
-                url,
-                diagnostics,
-                handler);
-
-            Items = new ItemService(_apiConnection, containerId, defaultLanguageCode);
-        }
-
-        public EvadaClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, bool usePreviewApi, string baseUrl)
-            : this(httpClient, token, containerId, defaultLanguageCode, usePreviewApi, baseUrl, null, null)
-        {
-        }
-
-        public EvadaClient(HttpClient httpClient, string token, string containerId, string defaultLanguageCode, bool usePreviewApi)
-            : this(httpClient, token, containerId, defaultLanguageCode, usePreviewApi, string.Empty, null, null)
-        {
-        }
-
-        public EvadaClient(HttpClient httpClient, string token, string containerId)
-            : this(httpClient, token, containerId, string.Empty, false, string.Empty, null, null)
-        {
-        }
-
-        public EvadaClient(HttpClient httpClient, EvadaOptions options)
-            : this(httpClient, options.UsePreviewApi ? options.PreviewApiToken : options.DeliveryApiToken, options.ContainerId, options.DefaultLanguageCode, options.UsePreviewApi, options.BaseUrl)
-        {
+            Items = new ItemService(_apiConnection, options);
         }
     }
 }

@@ -1,36 +1,22 @@
-﻿using Evada.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Evada
 {
     /// <summary>
     /// Contains information about an error returned from the API.
     /// </summary>
-    [JsonConverter(typeof(ApiErrorConverter))]
     public class ApiError
     {
-        /// <summary>
-        /// The error description for the HTTP Status Code
-        /// </summary>
-        [JsonProperty("error")]
-        public string Error { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        /// <summary>
-        /// The error code returned by the API
-        /// </summary>
-        [JsonProperty("errorCode")]
-        public string ErrorCode { get; set; }
+        [JsonProperty("title")]
+        public string Title { get; set; }
 
-        /// <summary>
-        /// The desription for the error.
-        /// </summary>
-        [JsonProperty("message")]
-        public string Message { get; set; }
+        [JsonProperty("status")]
+        public int Status { get; set; }
 
-        /// <summary>
-        /// The HTTP Status code.
-        /// </summary>
-        [JsonProperty("statusCode")]
-        public int StatusCode { get; set; }
+        [JsonProperty("detail")]
+        public string Detail { get; set; }
     }
 }

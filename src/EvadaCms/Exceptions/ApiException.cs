@@ -44,10 +44,18 @@ namespace Evada.Exceptions
         /// <param name="statusCode">The status code.</param>
         /// <param name="apiError">The API error.</param>
         public ApiException(HttpStatusCode statusCode, ApiError apiError)
-            : base(apiError == null ? statusCode.ToString() : apiError.Message)
+            : base(apiError == null ? statusCode.ToString() : apiError.Detail)
         {
             StatusCode = statusCode;
             ApiError = apiError;
+        }
+
+        public ApiException() : base()
+        {
+        }
+
+        public ApiException(string message) : base(message)
+        {
         }
     }
 }

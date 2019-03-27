@@ -14,7 +14,6 @@ namespace Evada.Http
     /// </summary>
     public class ApiConnection : IApiConnection
     {
-        //private string _baseUrl { get; } = "https://api.evadacms.com";
         private readonly DiagnosticsHeader _diagnostics;
         private readonly HttpClient _httpClient;
         private readonly string _token;
@@ -32,7 +31,11 @@ namespace Evada.Http
         /// <param name="baseUrl">The base URL of the requests.</param>
         /// <param name="diagnostics">The diagnostics. header</param>
         /// <param name="handler"></param>
-        public ApiConnection(HttpClient httpClient, string token, string baseUrl, DiagnosticsHeader diagnostics,
+        public ApiConnection(
+            HttpClient httpClient,
+            string token,
+            string baseUrl,
+            DiagnosticsHeader diagnostics,
             HttpMessageHandler handler = null)
         {
             if (string.IsNullOrEmpty(baseUrl))
@@ -46,11 +49,8 @@ namespace Evada.Http
             }
 
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-
             _token = token;
-
             _baseUrl = baseUrl;
-
             _diagnostics = diagnostics;
         }
 
@@ -202,21 +202,24 @@ namespace Evada.Http
                     var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                     if (!string.IsNullOrEmpty(responseContent))
+                    {
                         try
                         {
                             apiError = JsonConvert.DeserializeObject<ApiError>(responseContent);
-                            if (apiError.StatusCode == 0)
-                                apiError.StatusCode = (int)response.StatusCode;
+                            if (apiError.Status == 0)
+                            {
+                                apiError.Status = (int)response.StatusCode;
+                            }
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             apiError = new ApiError
                             {
-                                Error = responseContent,
-                                Message = responseContent,
-                                StatusCode = (int)response.StatusCode
+                                Detail = responseContent,
+                                Status = (int)response.StatusCode
                             };
                         }
+                    }
                 }
 
                 throw new ApiException(response.StatusCode, apiError);

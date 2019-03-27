@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Evada.Services.Items
+namespace Evada.Models
 {
     public class ItemSystem
     {
@@ -12,19 +12,19 @@ namespace Evada.Services.Items
         public string Name { get; set; }
 
         [JsonProperty("createdAt")]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [JsonProperty("updatedAt")]
-        public DateTime UpdatedDate { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         [JsonProperty("published")]
         public bool Published { get; set; }
 
         [JsonProperty("publishDate")]
-        public DateTime? PublishDate { get; set; }
+        public DateTime? PublishAt { get; set; }
 
         [JsonProperty("firstPublishedAt")]
-        public DateTime? FirstPublishedDate { get; set; }
+        public DateTime? FirstPublishedAt { get; set; }
 
         [JsonProperty("publishedVersion")]
         public int? PublishedVersion { get; set; }

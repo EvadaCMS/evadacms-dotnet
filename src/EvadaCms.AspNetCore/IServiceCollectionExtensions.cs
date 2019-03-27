@@ -1,4 +1,5 @@
-﻿using Evada.Configuration;
+﻿using Evada;
+using Evada.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -17,7 +18,7 @@ namespace Evada.AspNetCore
             services.Configure<EvadaOptions>(configuration.GetSection("EvadaOptions"));
             services.TryAddSingleton<HttpClient>();
             services.AddHttpClient(EvadaHttpClientName);
-            services.TryAddTransient(serviceProvider =>
+            services.TryAddTransient<IEvadaClient>(serviceProvider =>
             {
                 var options = serviceProvider.GetService<IOptions<EvadaOptions>>().Value;
                 var factory = serviceProvider.GetService<IHttpClientFactory>();

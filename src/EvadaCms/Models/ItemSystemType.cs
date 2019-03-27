@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Evada.Services.Items
+namespace Evada.Models
 {
     public class ItemSystemType
     {

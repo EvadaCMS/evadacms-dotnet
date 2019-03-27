@@ -1,4 +1,5 @@
 ﻿using Evada.Http;
+using Newtonsoft.Json;
 
 namespace Evada.Services
 {
@@ -12,6 +13,9 @@ namespace Evada.Services
         /// </summary>
         public IApiConnection Connection { get; }
 
+        public JsonSerializer Serializer => JsonSerializer.Create(SerializerSettings);
+        public JsonSerializerSettings SerializerSettings { get; set; } = new JsonSerializerSettings();
+
         /// <summary>
         /// Creates a new instance of the ServiceBase class.
         /// </summary>
@@ -19,6 +23,8 @@ namespace Evada.Services
         public ServiceBase(IApiConnection connection)
         {
             Connection = connection;
+
+            SerializerSettings.TypeNameHandling = TypeNameHandling.All;
         }
     }
 }

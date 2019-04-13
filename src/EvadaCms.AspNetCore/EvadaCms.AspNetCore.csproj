@@ -13,13 +13,13 @@
     <RepositoryUrl>https://github.com/EvadaCMS/evadacms-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>evada evadacms cms aspnet mvc aspnetcore</PackageTags>
-    <AssemblyVersion>4.0.1.0</AssemblyVersion>
-    <FileVersion>4.0.1.0</FileVersion>
-    <Version>4.0.1</Version>
+    <AssemblyVersion>4.0.2.0</AssemblyVersion>
+    <FileVersion>4.0.2.0</FileVersion>
+    <Version>4.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EvadaCms" Version="4.0.1" />
+    <PackageReference Include="EvadaCms" Version="4.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />

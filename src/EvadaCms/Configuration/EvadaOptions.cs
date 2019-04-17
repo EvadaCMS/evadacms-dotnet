@@ -7,5 +7,6 @@
         public string PreviewApiToken { get; set; }
         public bool UsePreviewApi { get; set; }
         public string BaseUrl { get; set; }
+        public string DefaultLanguageCode { get; set; }
     }
 }

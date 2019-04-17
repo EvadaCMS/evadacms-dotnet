@@ -2,10 +2,13 @@
 using Evada.Http;
 using Evada.Models;
 using Evada.Query;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Evada.Services
@@ -46,7 +49,7 @@ namespace Evada.Services
 
             foreach (var item in fullJson.SelectTokens("$.items[*]").OfType<JObject>())
             {
-                ResolveReferences(fullJson, item, processedIds);
+                ResolveReferences(fullJson, item, processedIds, typeof(T));
             }
 
             var itemTokens = fullJson.SelectTokens("$.items[*]..modules").ToList();
@@ -99,7 +102,7 @@ namespace Evada.Services
             var processedIds = new HashSet<string>();
 
             var itemToken = fullJson.SelectTokens("$.item").OfType<JObject>().First();
-            ResolveReferences(fullJson, itemToken, processedIds);
+            ResolveReferences(fullJson, itemToken, processedIds, typeof(T));
 
             var deepModuleTokens = fullJson.SelectTokens("$.item..modules..modules").ToList();
 
@@ -119,7 +122,7 @@ namespace Evada.Services
             return modulesToken.ToObject<T>(Serializer);
         }
 
-        private void ResolveReferences(JObject fullJson, JObject itemToken, HashSet<string> processedIds)
+        private void ResolveReferences(JObject fullJson, JObject itemToken, HashSet<string> processedIds, Type destinationType)
         {
             var id = ((JValue)itemToken.SelectToken("$.system.id"))?.Value?.ToString();
             if (id == null)
@@ -152,16 +155,48 @@ namespace Evada.Services
                         ?? fullJson.SelectTokens($"$.items.[?(@.system.id=='{referenceId}')]").FirstOrDefault();
                 }
 
+                PropertyInfo property = destinationType?.GetRuntimeProperties()
+                        .FirstOrDefault(p => (p.Name.Equals(propName, StringComparison.OrdinalIgnoreCase)
+                        || p.GetCustomAttribute<JsonPropertyAttribute>()?.PropertyName == propName));
+                if (property == null)
+                {
+                    continue;
+                }
+
+                bool collection = true;
+                Type propertyType = property.PropertyType;
+                var assignable = typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(propertyType.GetTypeInfo());
+                if (propertyType.IsArray)
+                {
+                    propertyType = propertyType.GetElementType();
+                }
+                else if (assignable && propertyType.IsConstructedGenericType)
+                {
+                    propertyType = propertyType.GetTypeInfo().GenericTypeArguments[0];
+                }
+                else
+                {
+                    collection = false;
+                }
+
                 var grandparent = (JObject)referenceToken.Parent.Parent;
 
                 if (updatedToken != null)
                 {
-                    grandparent.RemoveAll();
-                    grandparent.Add(updatedToken.Children());
+                    if (collection)
+                    {
+                        grandparent.RemoveAll();
+                        grandparent.Add(updatedToken.Children());
+                    }
+                    else
+                    {
+                        var moduleProperty = (JProperty)grandparent.Parent.Parent;
+                        moduleProperty.Value = updatedToken;
+                    }
 
                     if (!processedIds.Contains(referenceId))
                     {
-                        ResolveReferences(fullJson, grandparent, processedIds);
+                        ResolveReferences(fullJson, grandparent, processedIds, propertyType);
                     }
                 }
             }

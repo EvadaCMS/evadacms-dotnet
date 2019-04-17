@@ -211,7 +211,7 @@ namespace Evada.Http
                                 apiError.Status = (int)response.StatusCode;
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             apiError = new ApiError
                             {

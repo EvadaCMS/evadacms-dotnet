@@ -8,8 +8,8 @@ namespace Evada
 {
     public class EvadaClient : ClientBase, IEvadaClient
     {
-        public string DeliveryApiUrl => "https://delivery-api.evadacms.com/v1/";
-        public string PreviewApiUrl => "https://preview-api.evadacms.com/v1/";
+        public string DeliveryApiUrl => "https://delivery-api.evadacms.com";
+        public string PreviewApiUrl => "https://preview-api.evadacms.com";
         private readonly ApiConnection _apiConnection;
 
         public ItemService Items { get; }

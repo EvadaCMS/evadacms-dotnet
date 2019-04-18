@@ -35,7 +35,7 @@ namespace Evada.Services
 
         public async Task<ItemCollection<T>> GetAsync<T>(Dictionary<string, string> queryStrings)
         {
-            var responseString = await Connection.GetAsync<string>("{containerId}/items",
+            var responseString = await Connection.GetAsync<string>("containers/{containerId}/items",
                 new Dictionary<string, string>
                 {
                     { "containerId", _containerId }
@@ -88,7 +88,7 @@ namespace Evada.Services
                 throw new FormatException("itemId is not in the correct format.");
             }
 
-            var responseString = await Connection.GetAsync<string>("{containerId}/items/{itemId}",
+            var responseString = await Connection.GetAsync<string>("containers/{containerId}/items/{itemId}",
                 new Dictionary<string, string>
                 {
                     { "containerId", _containerId },

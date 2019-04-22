@@ -180,6 +180,7 @@ namespace Evada.Services
                 }
 
                 var grandparent = (JObject)referenceToken.Parent.Parent;
+                JProperty moduleProperty = null;
 
                 if (updatedToken != null)
                 {
@@ -190,13 +191,20 @@ namespace Evada.Services
                     }
                     else
                     {
-                        var moduleProperty = (JProperty)grandparent.Parent.Parent;
+                        moduleProperty = (JProperty)grandparent.Parent.Parent;
                         moduleProperty.Value = updatedToken;
                     }
 
                     if (!processedIds.Contains(referenceId))
                     {
-                        ResolveReferences(fullJson, grandparent, processedIds, propertyType);
+                        if (collection)
+                        {
+                            ResolveReferences(fullJson, grandparent, processedIds, propertyType);
+                        }
+                        else
+                        {
+                            ResolveReferences(fullJson, (JObject)moduleProperty.Value, processedIds, propertyType);
+                        }
                     }
                 }
             }
